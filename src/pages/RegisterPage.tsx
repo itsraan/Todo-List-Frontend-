@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { User, Lock, Mail, Eye, EyeOff } from 'lucide-react'
 import axios from 'axios'
 import { useNavigate, Link } from 'react-router-dom'
+import api from '../api/api'
 
 const RegisterPage = () => {
     const [formData, setFormData] = useState({
@@ -13,13 +14,6 @@ const RegisterPage = () => {
     const [loading, setLoading] = useState(false)
     const [showPassword, setShowPassword] = useState(false)
     const navigate = useNavigate()
-
-    const api = axios.create({
-        baseURL: 'http://localhost:5000/api',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    })
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()

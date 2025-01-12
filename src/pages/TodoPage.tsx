@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Plus, Trash, Edit, CheckCircle, LogOut, X, Menu } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import api from '../api/api'
 
 interface Note {
     id: string
@@ -17,15 +17,6 @@ const TodoPage: React.FC = () => {
     const [searchQuery, setSearchQuery] = useState('')
     const [isSidebarOpen, setIsSidebarOpen] = useState(false)
     const username = localStorage.getItem('name') || 'User'
-    const token = localStorage.getItem('token')
-
-    const axiosInstance = axios.create({
-        baseURL: 'http://localhost:5000/api',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-        }
-    })
 
     useEffect(() => {
         fetchTodos()
@@ -33,7 +24,7 @@ const TodoPage: React.FC = () => {
 
     const fetchTodos = async () => {
         try {
-            const response = await axiosInstance.get('/todos')
+            const response = await api.get('/todos')
             if (Array.isArray(response.data.data)) {
                 setNotes(response.data.data)
             } else {
@@ -46,7 +37,7 @@ const TodoPage: React.FC = () => {
 
     const handleLogout = async () => {
         try {
-            await axiosInstance.delete('/logout')
+            await api.delete('/logout')
             localStorage.removeItem('token')
             localStorage.removeItem('name')
             navigate('/')
@@ -63,7 +54,7 @@ const TodoPage: React.FC = () => {
         }
         
         try {
-            const response = await axiosInstance.post('/todos', newNote)
+            const response = await api.post('/todos', newNote)
             
             if (response.data?.data) {
                 const createdNote = response.data.data
@@ -78,7 +69,7 @@ const TodoPage: React.FC = () => {
 
     const handleDeleteNote = async (noteId: string) => {
         try {
-            await axiosInstance.delete(`/todos/${noteId}`)
+            await api.delete(`/todos/${noteId}`)
             setNotes(notes.filter(note => note.id !== noteId))
             if (selectedNote?.id === noteId) {
                 setSelectedNote(null)
@@ -97,7 +88,7 @@ const TodoPage: React.FC = () => {
                 isCompleted: !noteToToggle.isCompleted 
             }
             try {
-                const response = await axiosInstance.patch(`/todos/${noteId}`, updatedNote)
+                const response = await api.patch(`/todos/${noteId}`, updatedNote)
                 if (response.data?.data) {
                     setNotes(notes.map(note => note.id === noteId ? response.data.data : note))
                 }
@@ -126,7 +117,7 @@ const TodoPage: React.FC = () => {
                 description: updatedNote.description,
                 isCompleted: updatedNote.isCompleted
             }
-            await axiosInstance.patch(`/todos/${updatedNote.id}`, updateData)
+            await api.patch(`/todos/${updatedNote.id}`, updateData)
         } catch (error) {
             console.error('Error saving note:', error)
         }
@@ -241,7 +232,7 @@ const TodoPage: React.FC = () => {
                 {/* Main Content */}
                 <div className="flex-1 min-h-screen bg-white p-4">
                     {selectedNote ? (
-                        <div className="max-w-3xl mx-auto">
+                        <div className="max-w-3xl mx-auto ml-2">
                             <input
                                 type="text"
                                 value={selectedNote.title}
