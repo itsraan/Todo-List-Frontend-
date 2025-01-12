@@ -30,6 +30,7 @@ const LoginPage = () => {
 
             if (response.data.data?.token) {
                 localStorage.setItem('token', response.data.data?.token)
+                localStorage.setItem('name', response.data.data?.name)
                 navigate('/todo') 
             }
         } catch (err) {
@@ -78,6 +79,7 @@ const LoginPage = () => {
                             onChange={handleChange}
                             className="w-full pl-8 pr-3 py-2 border-b border-gray-300 focus:border-blue-500 outline-none transition-colors"
                             placeholder="Email"
+                            autoComplete="off"
                             required
                         />
                     </div>
@@ -91,6 +93,7 @@ const LoginPage = () => {
                             onChange={handleChange}
                             className="w-full pl-8 pr-8 py-2 border-b border-gray-300 focus:border-blue-500 outline-none transition-colors"
                             placeholder="Password"
+                            autoComplete="off"
                             required
                         />
                         <button

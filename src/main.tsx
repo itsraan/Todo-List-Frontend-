@@ -6,6 +6,7 @@ import ErrorPage from './pages/ErrorPage'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import TodoPage from './pages/TodoPage'
+import ProtectedRoute from './pages/ProtectedRoute'
 
 import './index.css'
 
@@ -21,7 +22,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/todo",
-    element: <TodoPage />
+    element: (
+      <ProtectedRoute>
+        <TodoPage />
+      </ProtectedRoute>
+    )
   }
 ])
 

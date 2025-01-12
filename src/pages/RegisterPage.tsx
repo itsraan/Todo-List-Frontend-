@@ -77,6 +77,7 @@ const RegisterPage = () => {
                             onChange={handleChange}
                             className="w-full pl-8 pr-3 py-2 border-b border-gray-300 focus:border-blue-500 outline-none transition-colors"
                             placeholder="Name"
+                            autoComplete="off"
                             required
                         />
                     </div>
@@ -90,6 +91,7 @@ const RegisterPage = () => {
                             onChange={handleChange}
                             className="w-full pl-8 pr-3 py-2 border-b border-gray-300 focus:border-blue-500 outline-none transition-colors"
                             placeholder="Email"
+                            autoComplete="off"
                             required
                         />
                     </div>
@@ -103,6 +105,7 @@ const RegisterPage = () => {
                             onChange={handleChange}
                             className="w-full pl-8 pr-8 py-2 border-b border-gray-300 focus:border-blue-500 outline-none transition-colors"
                             placeholder="Password"
+                            autoComplete="off"
                             required
                         />
                         <button
