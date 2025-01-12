@@ -28,7 +28,7 @@ const router = createBrowserRouter([
       </ProtectedRoute>
     )
   }
-])
+], {basename: "/"})
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
