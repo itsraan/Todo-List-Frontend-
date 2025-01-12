@@ -52,7 +52,7 @@ const RegisterPage = () => {
         <div className="min-h-screen bg-white flex items-center justify-center p-4">
             <div className="w-full max-w-sm">
                 <h1 className="text-3xl font-light text-center mb-8 text-gray-800">
-                    todo<span className="font-bold">list</span>
+                    To<span className="font-bold">Done</span>
                 </h1>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
